@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tubes Cursor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    /* Artwork is never filtered. Refracted sheets are masked to the glyphs
+       and additively blended, so fills stay authored. */
+    :root {
+      --optic-blue: 72 158 214;
+      --optic-green: 108 196 88;
+      --optic-cyan: 96 214 224;
+    }
+
+    .sign {
+      position: fixed;
+      top: 28px;
+      left: 50%;
+      z-index: 20;
+      width: min(560px, 86vw);
+      aspect-ratio: 762 / 256;
+      transform: translateX(-50%);
+      isolation: isolate;
+      pointer-events: none;
+    }
+
+    .sign__mark {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .sign__optics {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      -webkit-mask-image: url("/public/logo.svg");
+      mask-image: url("/public/logo.svg");
+      -webkit-mask-size: 100% 100%;
+      mask-size: 100% 100%;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+    }
+
+    /* Skewed light sheets. Different angles = chromatic dispersion. */
+    .sign__sheet {
+      position: absolute;
+      top: -40%;
+      bottom: -40%;
+      left: 0;
+      width: 11%;
+      will-change: transform;
+      animation: sheet-pass var(--sheet-time, 9s) linear infinite;
+      animation-delay: var(--sheet-delay, 0s);
+    }
+
+    .sign__sheet--blue {
+      --skew: -18deg;
+      --sheet-time: 8.5s;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgb(var(--optic-blue) / 0.15) 32%,
+        rgb(var(--optic-blue) / 0.55) 48%,
+        rgb(226 244 255 / 0.85) 50%,
+        rgb(var(--optic-blue) / 0.4) 54%,
+        transparent 100%);
+      box-shadow: 0 0 22px 6px rgb(var(--optic-blue) / 0.28);
+    }
+
+    .sign__sheet--green {
+      --skew: -13deg;
+      --sheet-time: 11s;
+      --sheet-delay: -3.4s;
+      width: 9%;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgb(var(--optic-green) / 0.12) 36%,
+        rgb(var(--optic-green) / 0.5) 48%,
+        rgb(220 255 214 / 0.75) 51%,
+        rgb(var(--optic-green) / 0.32) 56%,
+        transparent 100%);
+      box-shadow: 0 0 18px 5px rgb(var(--optic-green) / 0.22);
+    }
+
+    .sign__sheet--cyan {
+      --skew: -21deg;
+      --sheet-time: 7.2s;
+      --sheet-delay: -1.6s;
+      width: 6%;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgb(var(--optic-cyan) / 0.1) 40%,
+        rgb(var(--optic-cyan) / 0.48) 49%,
+        rgb(235 255 255 / 0.8) 51%,
+        rgb(var(--optic-cyan) / 0.28) 58%,
+        transparent 100%);
+      box-shadow: 0 0 16px 4px rgb(var(--optic-cyan) / 0.2);
+    }
+
+    @keyframes sheet-pass {
+      from { transform: skewX(var(--skew, -16deg)) translateX(-180%); }
+      to   { transform: skewX(var(--skew, -16deg)) translateX(1100%); }
+    }
+
+    @media (max-height: 560px) {
+      .sign { top: 12px; width: min(360px, 78vw); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sign__optics { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <canvas id="canvas"></canvas>
+
+    <div class="sign">
+      <img
+        class="sign__mark"
+        src="/public/logo.svg"
+        alt="Bhakti Enterprises"
+        width="762"
+        height="256"
+      >
+      <div class="sign__optics" aria-hidden="true">
+        <div class="sign__sheet sign__sheet--blue"></div>
+        <div class="sign__sheet sign__sheet--green"></div>
+        <div class="sign__sheet sign__sheet--cyan"></div>
+      </div>
+    </div>
+
+    <div class="hero">
+      <h1>The solution</h1>
+      <h2>to all your worries</h2>
+      <a target="_blank" href="https://www.framer.com/@kevin-levron/">Framer Component</a>
+    </div>
+  </div>
+  <script type="module" src="../script.js"></script>
+</body>
+</html>

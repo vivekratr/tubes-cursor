@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tubes Cursor</title>
+  <script>
+    document.documentElement.setAttribute(
+      "data-theme",
+      localStorage.getItem("coming-soon-theme") === "light" ? "light" : "dark"
+    );
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div id="app">
+    <canvas id="canvas"></canvas>
+
+    <div class="sign">
+      <img
+        class="sign__mark"
+        id="logo"
+        src="../public/logo-white.svg"
+        alt="Vectosolve"
+        width="762"
+        height="256"
+      >
+      <canvas class="sign__field" id="dna" aria-hidden="true"></canvas>
+      <div class="sign__pulse" id="pulse" aria-hidden="true"></div>
+    </div>
+
+    <div class="hero">
+      <h1>The solution</h1>
+      <h2>to all your worries</h2>
+      <a target="_blank" href="https://www.framer.com/@kevin-levron/">Framer Component</a>
+    </div>
+  </div>
+  <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to light mode">
+    <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 3v1.5M12 19.5V21M4.22 4.22l1.06 1.06M18.72 18.72l1.06 1.06M3 12h1.5M19.5 12H21M4.22 19.78l1.06-1.06M18.72 5.28l1.06-1.06"/>
+    </svg>
+    <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M21 14.3A8.5 8.5 0 1 1 9.7 3 7 7 0 0 0 21 14.3z"/>
+    </svg>
+  </button>
+  <script src="./script.js"></script>
+  <script type="module" src="./tubes.js"></script>
+</body>
+</html>
